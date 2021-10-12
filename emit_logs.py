@@ -1,9 +1,21 @@
 #!/bin/python3
 
+import os
 import pika
 import sys
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
+
+connection = pika.BlockingConnection(
+    pika.ConnectionParameters(
+        host=os.getenv("PIKA_HOST"),
+        port=os.getenv("PIKA_PORT"),
+        virtual_host=os.getenv("PIKA_VIRTUAL_HOST"),
+        credentials=pika.PlainCredentials(
+            username=os.getenv("PIKA_USERNAME"),
+            password=os.getenv("PIKA_PASSWORD"),
+        ),
+    )
+)
 channel = connection.channel()
 
 channel.exchange_declare(exchange="logs", exchange_type="fanout")
