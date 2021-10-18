@@ -1,36 +1,39 @@
 #!/bin/python3
-
-import os
 import pika
-
-
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(
-        host=os.getenv("PIKA_HOST"),
-        port=os.getenv("PIKA_PORT"),
-        virtual_host=os.getenv("PIKA_VIRTUAL_HOST"),
-        credentials=pika.PlainCredentials(
-            username=os.getenv("PIKA_USERNAME"),
-            password=os.getenv("PIKA_PASSWORD"),
-        ),
-    )
+import sys
+connection=pika.BlockingConnection(
+pika.ConnectionParameters(
+    host="**.***.***.***",
+    port=5672,
+    virtual_host="********",
+    credentials=pika.PlainCredentials(
+        username="****",
+        password="****",
+    ),
+)
 )
 channel = connection.channel()
 
-channel.exchange_declare(exchange="logs", exchange_type="fanout")
-
-result = channel.queue_declare(queue="", exclusive=True)
-queue_name = result.method.queue
-
-channel.queue_bind(exchange="logs", queue=queue_name)
-
-print(" [*] Waiting for logs. To exit press CTRL+C")
+channel.exchange_declare(exchange='logs', exchange_type='fanout')
 
 
-def callback(ch, method, properties, body):
-    print(" [x] %r" % body)
+path = "/home/danny/Projects/dummy/dummy.txt"
+file = open(path, "r")
+exe = file.read()
+file.close()
 
 
-channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
 
-channel.start_consuming()
+
+
+#try:
+ #   inputNum = int(input(" input a number"))
+#except Exception as e:
+
+  #  print (e)
+ #   exe = str(e)
+ 
+message = exe
+channel.basic_publish(exchange='logs', routing_key='', body=message)
+print(" [x] Sent %r" % message)
+connection.close

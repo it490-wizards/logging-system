@@ -1,26 +1,39 @@
 #!/bin/python3
-
-import os
 import pika
 import sys
-
-
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(
-        host=os.getenv("PIKA_HOST"),
-        port=os.getenv("PIKA_PORT"),
-        virtual_host=os.getenv("PIKA_VIRTUAL_HOST"),
-        credentials=pika.PlainCredentials(
-            username=os.getenv("PIKA_USERNAME"),
-            password=os.getenv("PIKA_PASSWORD"),
-        ),
-    )
+connection=pika.BlockingConnection(
+pika.ConnectionParameters(
+    host="**.***.***.***",
+    port=5672,
+    virtual_host="********",
+    credentials=pika.PlainCredentials(
+        username="****",
+        password="****",
+    ),
+)
 )
 channel = connection.channel()
 
-channel.exchange_declare(exchange="logs", exchange_type="fanout")
+channel.exchange_declare(exchange='logs', exchange_type='fanout')
 
-message = " ".join(sys.argv[1:]) or "info: Hello World!"
-channel.basic_publish(exchange="logs", routing_key="", body=message)
+
+path = "/home/danny/Projects/dummy/dummy.txt"
+file = open(path, "r")
+exe = file.read()
+file.close()
+
+
+
+
+
+#try:
+ #   inputNum = int(input(" input a number"))
+#except Exception as e:
+
+  #  print (e)
+ #   exe = str(e)
+ 
+message = exe
+channel.basic_publish(exchange='logs', routing_key='', body=message)
 print(" [x] Sent %r" % message)
-connection.close()
+connection.close
