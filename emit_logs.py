@@ -1,23 +1,26 @@
 #!/bin/python3
 import pika
 import sys
-connection=pika.BlockingConnection(
-pika.ConnectionParameters(
-    host="**.***.***.***",
-    port=5672,
-    virtual_host="********",
-    credentials=pika.PlainCredentials(
-        username="****",
-        password="****",
-    ),
+
+
+connection = pika.BlockingConnection(
+    pika.ConnectionParameters(
+        host=os.getenv("PIKA_HOST"),
+        port=os.getenv("PIKA_PORT"),
+        virtual_host=os.getenv("PIKA_VIRTUAL_HOST"),
+        credentials=pika.PlainCredentials(
+            username=os.getenv("PIKA_USERNAME"),
+            password=os.getenv("PIKA_PASSWORD"),
+        ),
+    )
 )
-)
+
 channel = connection.channel()
 
 channel.exchange_declare(exchange='logs', exchange_type='fanout')
 
 
-path = "/home/danny/Projects/dummy/dummy.txt"
+path = ""
 file = open(path, "r")
 exe = file.read()
 file.close()
