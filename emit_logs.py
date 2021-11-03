@@ -20,12 +20,15 @@ channel = connection.channel()
 channel.exchange_declare(exchange='logs', exchange_type='fanout')
 
 
-path = ""
-file = open(path, "r")
+path = "PATH TO STD ERROR LOGS"
+fil = open(path, "r")
 exe = file.read()
 file.close()
 
-
+path = "PATH TO APACHE ERROR LOGS"
+file = open(path, "r")
+exe = file.read()
+file.close()
 
 
 

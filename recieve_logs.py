@@ -28,7 +28,7 @@ print(' [*] Waiting for logs. To exit press CTRL+C')
 
 def callback(ch, method, properties, body):
     print(" [x] %r" % body)
-    #path = "/Projects/rabbitmqphp_example/testlog.txt"
+    #path = "
     #sys.stdout = open(path, "a") as myfile:
         #myfile.write("hi")
     with open("testlog.txt", "a") as myfile:
