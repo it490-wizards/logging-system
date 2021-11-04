@@ -1,6 +1,11 @@
-#!/bin/python3
-import pika
+#!/usr/bin/python3
+
+import os
 import sys
+import dotenv
+import pika
+
+dotenv.load_dotenv()
 
 
 connection = pika.BlockingConnection(
