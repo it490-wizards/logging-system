@@ -26,13 +26,13 @@ channel.exchange_declare(exchange='logs', exchange_type='fanout')
 
 
 path = "PATH TO STD ERROR LOGS"
-fil = open(path, "r")
+file = open(path, "r")
 exe = file.read()
 file.close()
 
 path = "PATH TO APACHE ERROR LOGS"
 file = open(path, "r")
-exe = file.read()
+exe2 = file.read()
 file.close()
 
 
@@ -45,6 +45,9 @@ file.close()
  #   exe = str(e)
  
 message = exe
+message2 = exe2
 channel.basic_publish(exchange='logs', routing_key='', body=message)
+print(" [x] Sent %r" % message)
+channel.basic_publish(exchange='logs', routing_key='', body=message2)
 print(" [x] Sent %r" % message)
 connection.close

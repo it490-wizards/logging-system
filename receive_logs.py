@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 import os
 import sys
 import dotenv
@@ -33,9 +32,9 @@ print(' [*] Waiting for logs. To exit press CTRL+C')
 
 def callback(ch, method, properties, body):
     print(" [x] %r" % body)
-    #path = "
-    #sys.stdout = open(path, "a") as myfile:
-        #myfile.write("hi")
+
+    path = "/path/to/testlog"
+    
     with open("testlog.txt", "a") as myfile:
         myfile.write(" [x] %r" % body + " \n")
 
