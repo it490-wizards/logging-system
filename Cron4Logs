@@ -1,0 +1,6 @@
+#Cron for Logging System
+
+#@reboot /path/to/receive/logs
+
+#*/5 * * * * /path/to/emit/logs
+
