@@ -49,5 +49,5 @@ message2 = exe2
 channel.basic_publish(exchange='logs', routing_key='', body=message)
 print(" [x] Sent %r" % message)
 channel.basic_publish(exchange='logs', routing_key='', body=message2)
-print(" [x] Sent %r" % message)
+print(" [x] Sent %r" % message2)
 connection.close
