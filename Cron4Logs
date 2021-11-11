@@ -1,6 +1,6 @@
 #Cron for Logging System
 
-#@reboot /path/to/receive_logs.py
+@reboot /path/to/receive_logs.py
 
-#*/5 * * * * /path/to/emit_log.py >> /path/to/testlog.txt 2>&1
+*/5 * * * * /path/to/emit_log.py >> /path/to/testlog.txt 2>&1
 

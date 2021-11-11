@@ -33,9 +33,9 @@ print('  Waiting for logs. To exit press CTRL+C')
 def callback(ch, method, properties, body):
     print("  %r" % body)
 
-    path = "/path/to/testlog.txt"
+    path = "/path/to/testlogreceived.txt"
    
-    with open("testlog.txt", "a") as myfile:
+    with open(path, "a") as myfile:
         myfile.write("  %r" % body + " \n")
 
 channel.basic_consume(
